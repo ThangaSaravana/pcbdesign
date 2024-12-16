@@ -5,23 +5,56 @@ import "./App.css";
 
 const App =()=> {
   
-  const [thicknesstype,setThicknessType] = useState()
+  const [thicknesstype,setThicknessType] = useState(2)
   const [current,setCurrent]= useState()
   const [thickness,setThickness] = useState()
   const [temprise,setTemprise] = useState()
-  const [amptemp,setAmpTemp] = useState()
+  const [amptemp,setAmpTemp] = useState()   //with no use actually
   const [result,setResult]=useState("")
+  const [layers,setLayers] = useState(1)
 
   const handleSelect =(e)=>{
+   setResult("")
    setThicknessType(e.target.value)
+   handleCalculate()
   }
+  console.log(thicknesstype)
 
-  console.log("page init called")
-
-  const handleCalculate =()=>{
-   const area = (current/Math.pow((0.024*Math.pow(temprise,0.44)),1/0.725))
-   const width = (area/(thickness*1.378))
-   setResult(width.toFixed(2))
+  const handleLayers = (e)=>{
+   setResult("")
+   setLayers(e.target.value)
+   if(e.target.value==2){
+    handleCalculate(2)
+   }else{
+    handleCalculate()
+   }
+  
+  }
+  
+  const handleCalculate =(val)=>{
+   if(val==2){
+    const area = (current/Math.pow((0.048*Math.pow(temprise,0.44)),1/0.725))
+    const width = (area/(thickness*1.378))
+    if(thicknesstype==1){
+      const wd = width*2.54
+      setResult(wd.toFixed(2))
+    }else if(thicknesstype==2){
+      setResult(width.toFixed(2))
+    }
+   
+   }else{
+    const area = (current/Math.pow((0.024*Math.pow(temprise,0.44)),1/0.725))
+    const width = (area/(thickness*1.378))
+    setResult(width.toFixed(2))
+    if(thicknesstype==1){
+      console.log("called here in mmm")
+      const wd = width*2.54
+      setResult(wd.toFixed(2))
+    }else if(thicknesstype==2){
+      console.log("else called")
+      setResult(width.toFixed(2))
+    }
+   }
   }
   return (
     <div
@@ -263,64 +296,30 @@ const App =()=> {
                   />
                 </div>
               </div>
-              <div style={{ width: "2%" }}></div>
+              
               <div
                 style={{
-                  width: "28%",
+                  width: "30%",
                   height: "100%",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  flexDirection: "row",
                 }}
               >
-                <div className="input-group">
-                  <select
-                    className="form-select"
-                    id="inputGroupSelect02"
-                    onChange={(e)=>handleSelect(e)}
-                    defaultValue="" 
-                  >
-                    <option value="" disabled>
-                      select..
-                    </option>
-                    <option value="1">oz/ft2</option>
-                    <option value="2">mm</option>
-                    <option value="3">mils</option>
-                  </select>
-                  {thicknesstype =="1" ?
-                  (<label
-                    className="input-group-text"
-                    htmlFor="inputGroupSelect02"
-                    style={{ backgroundColor: "#e3aa8b", fontWeight: "bold",fontSize:"15px" }}
-                  > 
-                    oz/ft<sup>2</sup>                
-                  </label>)
-                  :thicknesstype =="2" ?
-                  (<label
-                    className="input-group-text"
-                    htmlFor="inputGroupSelect02"
-                    style={{ backgroundColor: "#e3aa8b", fontWeight: "bold",fontSize:"15px"  }}
-                  > 
-                   <span>mm</span>               
-                  </label>)
-                  :thicknesstype =="3" ?
-                  (<label
-                    className="input-group-text"
-                    htmlFor="inputGroupSelect02"
-                    style={{ backgroundColor: "#e3aa8b", fontWeight: "bold",fontSize:"15px"  }}
-                  > 
-                   mils              
-                  </label>)
-                  :<label
-                    className="input-group-text"
-                    htmlFor="inputGroupSelect02"
-                    style={{ backgroundColor: "#e3aa8b", fontWeight: "bold",fontSize:"15px"  }}
-                  > 
-                    pickone                
-                  </label>
-                   }
-                
+                <div
+                  style={{
+                    width: "70%",
+                    height: "70%",
+                    background: "red",
+                    fontWeight: "bold",
+                    backgroundColor: "#e3aa8b",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: 8,
+                  }}
+                >
+                  <h5 style={{ fontWeight: "bold",fontSize:"15px"}}>oz/ft<sup>2</sup></h5>
                 </div>
               </div>
             </div>
@@ -556,19 +555,23 @@ const App =()=> {
                   alignItems: "center",
                 }}
               >
-                <div
-                  style={{
-                    width: "45%",
-                    height: "70%",
-                    backgroundColor: "#e3aa8b",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    borderRadius: 8,
-                  }}
-                >
-                  <h5 style={{ fontSize: "15px", fontWeight: "bold" }}>{thicknesstype=="3"?"mils":"mm"}</h5>
-                </div>
+              <div class="input-group">
+                <select class="form-select" id="inputGroupSelect02" onChange={(e)=>handleSelect(e)}>
+                  <option selected value="" disabled>
+                    select..
+                  </option>
+                  <option value="1">mm</option>
+                  <option value="2">mils</option>
+                </select>
+                <select class="form-select" id="inputGroupSelect02" onChange={(e)=>handleLayers(e)}>
+                  <option selected value="" disabled>
+                    select..
+                  </option>
+                  <option value="1">Internal Layers</option>
+                  <option value="2">External Layers</option>
+                </select>
+                <label class="input-group-text" for="inputGroupSelect02" style={{backgroundColor: "#e3aa8b", fontWeight: "bold",fontSize:"15px"}}>{thicknesstype==1?"mm":"mils"}</label>
+              </div>
               </div>
             </div>
           </div>
