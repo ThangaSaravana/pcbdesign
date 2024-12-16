@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/pcbdesign/static/css/main.d47629eb.css",
+    "main.js": "/pcbdesign/static/js/main.3a9e1731.js",
+    "static/media/edrift.jpeg": "/pcbdesign/static/media/edrift.c4147de48bb801387419.jpeg",
+    "static/media/track.jpeg": "/pcbdesign/static/media/track.e0db71c370852d26531f.jpeg",
+    "index.html": "/pcbdesign/index.html",
+    "main.d47629eb.css.map": "/pcbdesign/static/css/main.d47629eb.css.map",
+    "main.3a9e1731.js.map": "/pcbdesign/static/js/main.3a9e1731.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d47629eb.css",
+    "static/js/main.3a9e1731.js"
+  ]
+}
