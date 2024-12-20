@@ -34,21 +34,31 @@ const App =()=> {
   const handleCalculate =(val)=>{
    if(val==2){
     const area = Math.pow((current/(0.048*Math.pow(temprise,0.44))),1/0.725)
+    console.log()
     const width = (area/(thickness*1.378))
     if(thicknesstype==1){
-      const wd = width*2.54
+      const wd = width*0.0254
       setResult(wd.toFixed(2))
     }else if(thicknesstype==2){
       setResult(width.toFixed(2))
     }
    
    }else{
-    const area = Math.pow((current/(0.024*Math.pow(temprise,0.44))),1/0.725)
-    const width = (area/(thickness*1.378))
+    const area = Math.pow((current/(0.048*Math.pow(temprise,0.44))),1/0.725)
+    console.log(area)
+    let thick =  thickness*1.378
+    const width = (area/thick)
+    console.log(width,"here")
+    // console.log(thickness,"thick")
+    // console.log(thickness*1.378,"thivk81.378")
+    // console.log(width,"here is the width")
+    // console.log(area/(thickness*1.378),"the area ")
+    // const area2 = Math.pow((5/(0.048*Math.pow(10,0.44))),1/0.725)
+    // console.log(area2,"here is the area") 
     setResult(width.toFixed(2))
     if(thicknesstype==1){
       console.log("called here in mmm")
-      const wd = width*2.54
+      const wd = width*0.0254
       setResult(wd.toFixed(2))
     }else if(thicknesstype==2){
       console.log("else called")
