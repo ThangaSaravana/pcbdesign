@@ -43,7 +43,7 @@ const App =()=> {
     }
    
    }else{
-    const area = (current/Math.pow((0.024*Math.pow(temprise,0.44)),1/0.725))
+    const area = Math.pow((current/(0.024*Math.pow(temprise,0.44))),1/0.725)
     const width = (area/(thickness*1.378))
     setResult(width.toFixed(2))
     if(thicknesstype==1){
