@@ -33,7 +33,7 @@ const App =()=> {
   
   const handleCalculate =(val)=>{
    if(val==2){
-    const area = (current/Math.pow((0.048*Math.pow(temprise,0.44)),1/0.725))
+    const area = Math.pow((current/(0.048*Math.pow(temprise,0.44))),1/0.725)
     const width = (area/(thickness*1.378))
     if(thicknesstype==1){
       const wd = width*2.54
